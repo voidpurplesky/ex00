@@ -1,0 +1,18 @@
+# Java
+*.class
+*.jar
+
+# Maven
+target/
+
+
+Servers/
+
+# STS
+.springBeans
+
+# Eclise
+.settings/
+.project
+.classpath
+.metadata/
