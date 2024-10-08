@@ -25,4 +25,17 @@ public class TimeMapperTests {
 		log.info(timeMapper.getClass().getName());
 		log.info(timeMapper.getTime());
 	}
+	
+	@Test
+	public void testGetTime2() {
+		log.info("-----[Mapper 어노테이션 테스트2]--------------");
+		log.info(timeMapper.getClass().getName());
+		log.info(timeMapper.getTime2());
+	}
+	/*
+	@Test
+	public void getOneTitle() {
+		log.info("-----[getOneTitle]--------------");
+		log.info(timeMapper.getOneOne());
+	}*/
 }

@@ -8,4 +8,6 @@ public interface TimeMapper {
 
 	@Select("select sysdate from dual")
 	public String getTime();
+	public String getTime2(); // TimeMapper.xml과 연결되어있음
+	//public String getOneOne();
 }

@@ -8,10 +8,15 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+			<!-- Oracle 드라이버 사용
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"></property>
+		<property name="jdbcUr0l" value="jdbc:oracle:thin:@localhost:1521:XE"></property> 
+		
+		log4jdbc-log4j2 로그출력 드라이버 사용
+		-->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"/>
 		<property name="username" value="java"></property>
 		<property name="password" value="java"></property>
 	</bean>
