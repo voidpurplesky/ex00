@@ -9,14 +9,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.zerock.vo.SampleVO;
 import org.zerock.vo.SampleVOList;
 import org.zerock.vo.TodoVO;
@@ -215,5 +218,29 @@ http://localhost/sample/ex08?name=java&age=10&page=20
 		HttpHeaders header = new HttpHeaders();
 		header.add("Content-Type", "application/json;charset=UTF-8");
 		return new ResponseEntity<>(msg, header, HttpStatus.OK);
+	}
+	
+
+	@GetMapping("/upload")
+	public void upload() {
+		log.info("upload");
+	}
+	
+	@PostMapping("/upload")
+	public void postUpload(ArrayList<MultipartFile> files) {
+		for(MultipartFile file:files) {
+			log.info(file.getOriginalFilename());
+			log.info(file.getSize());
+		}
+	}
+	
+	@GetMapping("/thEx")
+	public void thEx() throws Exception {
+		throw new Exception("goodEx");
+	}
+	
+	@GetMapping("/ex11")
+	public String ex11() {
+		return "ex11";
 	}
 }
