@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.board.service.BoardService;
 import org.zerock.board.vo.BoardVO;
 import org.zerock.util.PageObject;
@@ -50,17 +51,45 @@ public class BoardController {
 	}
 	
 	@PostMapping("/write")
-	public String write(BoardVO vo) {
+	public String write(BoardVO vo, RedirectAttributes rttr) {
 		log.info(vo);
 		service.write(vo);
+		rttr.addFlashAttribute("msg", "글등록완");
 		return "redirect:/board/list";
 	}
 	
 	//http://localhost/board/view?no=41
-	@GetMapping("view")
+	@GetMapping("/view")
 	public String view(Model model, Long no) {
 		service.increase(no);
 		model.addAttribute("vo", service.view(no));
 		return "board/view";
+	}
+	
+	@GetMapping("/update")
+	public String update(Model model, Long no) {
+		model.addAttribute("vo", service.view(no));
+		return "board/update";
+	}
+	
+	@PostMapping("/update")
+	public String update(BoardVO vo, RedirectAttributes rttr) {
+		if (service.update(vo) == 1)
+			rttr.addFlashAttribute("msg", "글수정완");
+		else
+			rttr.addFlashAttribute("msg", "비밀번호가 틀림");
+		
+		return "redirect:/board/view/?no="+vo.getNo();
+	}
+	
+	@GetMapping("/delete")
+	public String delete(Long no, RedirectAttributes rttr) {
+		
+		if (service.delete(no) == 1)
+			rttr.addFlashAttribute("msg", "글수정완");
+		else
+			rttr.addFlashAttribute("msg", "비밀번호가 틀림");
+		
+		return "redirect:/board/list";
 	}
 }

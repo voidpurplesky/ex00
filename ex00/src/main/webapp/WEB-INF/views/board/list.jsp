@@ -5,8 +5,8 @@
 <%@ taglib prefix="pageNav" tagdir="/WEB-INF/tags" %>
 <%--
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page" %> --%>
 
- <%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,7 @@
 	cursor: pointer;
 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <script>
 $(function(){
 	$(".dataRow").click(function(){
@@ -30,16 +30,19 @@ $(function(){
 	});
 });
 </script>
+<jsp:include page="../jsp/webLib.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="../jsp/webLib.jsp"></jsp:include>
+
 <%-- <decorator:main/> --%>
 ${list}
 <a href="writeForm">writeForm</a>
 <div class="container">
   <h2>Card Header and Footer</h2>
   <div class="card">
-    <div class="card-header">card-header</div>
+    <div class="card-header">card-header
+    	<a href="writeForm" class="btn btn-primary" id="writeForm">writeForm</a>
+    </div>
     <div class="card-body">
     <c:forEach items="${ list}" var="vo">
     	<div class="card dataRow" data-no="${vo.no }">

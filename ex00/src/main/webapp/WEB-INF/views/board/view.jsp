@@ -6,14 +6,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="../jsp/webLib.jsp"></jsp:include>
+<script>
+$(function(){
+
+	/* $("#test").click(function(){
+		$('#myModal').modal('show');
+	}); */
+
+	});
+$("#updateBtn").click(function(){
+	location = "update?no=${vo.no}";
+});
+
+$("#deleteBtn").click(function(){
+	$("#pw").val("");
+});
+
+</script>
+
 </head>
 <body>
 ${vo}
-<jsp:include page="../jsp/webLib.jsp"></jsp:include>
+
 <div class="container">
-  <h2>Card Header and Footer</h2>
+  <h2>view</h2>
   <div class="card">
-    <div class="card-header">${vo.title }</div>
+    <div class="card-header">
+    	
+   		<a href="list" class="btn btn-primary">list</a>
+   
+   		<a href="update?no=${vo.no }" class="btn btn-primary">update</a> 
+ 
+   		<a href="delete?no=${vo.no }" class="btn btn-primary">delete</a>
+   		<button class="btn btn-danger" id="deleteBtn">delete</button>
+    <button class="btn btn-primary" id="updateBtn">update</button>
+    <button id="test" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+    </div>
     <div class="card-body">${vo.content }
     
     	<div class="card dataRow" data-no="${vo.no }">
@@ -34,5 +65,34 @@ ${vo}
     </div>
   </div>
 </div>
+<div id="myModal" class="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<form action="delete" method="post">
+	<input type="hidden" name="no" value="${vo.no }">
+	<div class="modal-body">
+		<div class="form-group">
+			<input class="form-control" type="password" name="pw" id="pw">
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-danger">delete</button>
+		<button class="btn btn-secondary" data-dismiss="modal">close</button>
+	</div>
+</form>
 </body>
 </html>

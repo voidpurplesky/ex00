@@ -19,10 +19,10 @@
   where rnum between #{startRow} and #{endRow}
   </select>
   
-  <insert id="write" parameterType="org.zerock.board.vo.BoardVO">
+<!--   <insert id="write" parameterType="org.zerock.board.vo.BoardVO">
   insert into board(no, title, content, writer, pw)
   values (board_seq.nextval, #{title}, #{content}, #{writer}, #{pw})
-  </insert>
+  </insert> -->
   
     <select id="view" parameterType="Long" resultType="org.zerock.board.vo.BoardVO">
   select no, title, content, writer, writedate, hit 
@@ -37,6 +37,28 @@
   <select id="getTotalRow" resultType="Long">
   select count(no) from board
   </select>
+  
+  <insert id="write">
+  	<selectKey keyProperty="no" resultType="Long" order="BEFORE">
+  		select board_seq.nextval from dual
+  	</selectKey>
+  	  insert into board(no, title, content, writer, pw)
+  	values (#{no}, #{title}, #{content}, #{writer}, #{pw})
+  </insert>
+  <update id="update">
+  <!-- ![CDATA[]] -->
+<![CDATA[
+  update board set 
+  title = #{title}
+  , content = #{content}
+  , writer = #{writer}
+  where no = #{no} and pw = #{pw}
+  ]]>
+  </update>
+  <delete id="delete" parameterType="Long">
+  delete from board
+  where no = #{no}
+  </delete>
   <!--<select id="OneOne" resultType="string">
   select title from BOARD 
   WHERE ROWNUM= 1

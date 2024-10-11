@@ -203,7 +203,6 @@
 			})
 		</script>
 	</c:if>
-	
 </body>
 </html>
-<%session.removeAttribute("msg"); %>
+<%-- <%session.removeAttribute("msg"); %> --%>

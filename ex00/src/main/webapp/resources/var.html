@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+let name = "한글";
+console.log(name);
+
+let func = function() {
+	console.log("func 함수 내부");
+};
+
+console.log(func);
+func();
+
+let varJson = {"name":"JSON네임"};
+varJson.age = 30;
+console.log(varJson);
+console.log(JSON.stringify(varJson));
+console.log(varJson.name);
+
+varJson.f1 = func;
+console.log(varJson.f1);
+let addFunc = function() {
+	console.log("addFunc start");
+};
+function addFunc2() {
+	console.log("addFunc2 start");
+};
+console.log(addFunc);
+console.log(addFunc2);
+addFunc();
+addFunc2();
+let replyService = (function(){
+	function list() {
+		console.log("list");
+	}
+	function write() {
+		console.log("write");
+	}
+	function update() {
+		console.log("update");
+	}
+	function remove() {
+		console.log("remove");
+	}
+	return { // 실행함수를 모아 json데이터로 리턴
+		"list": list,
+		"write": write,
+		"update": update,
+		"remove": remove
+	};
+})();
+
+replyService.list();
+</script>
+</head>
+<body>
+http://localhost/resources/var.html
+</body>
+</html>

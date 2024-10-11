@@ -34,4 +34,12 @@ public class BoardService {
 	public Integer increase(Long no) {
 		return mapper.increase(no);
 	}
+	
+	public Integer update(BoardVO vo) {
+		return mapper.update(vo);
+	}
+	
+	public Integer delete(Long no) {
+		return mapper.delete(no);
+	}
 }

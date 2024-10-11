@@ -12,4 +12,6 @@ public interface BoardMapper {
 	public BoardVO view(Long no);
 	public Integer increase(Long no);
 	public Long getTotalRow(PageObject pageObject);
+	public Integer update(BoardVO vo);
+	public Integer delete(Long no);
 }
