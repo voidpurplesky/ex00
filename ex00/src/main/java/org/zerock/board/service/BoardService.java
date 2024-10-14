@@ -10,36 +10,17 @@ import org.zerock.util.PageObject;
 
 import lombok.extern.log4j.Log4j;
 
-@Service
-@Log4j
-public class BoardService {
-
-	@Autowired
-	private BoardMapper mapper;
+public interface BoardService {
 	
-	public List<BoardVO> list(PageObject pageObject) {
-		log.info("list");
-		pageObject.setTotalRow(mapper.getTotalRow(pageObject));
-		return mapper.list(pageObject);
-	}
+	public List<BoardVO> list(PageObject pageObject);
 	
-	public Integer write(BoardVO vo) {
-		return mapper.write(vo);
-	}
+	public Integer write(BoardVO vo);
 	
-	public BoardVO view(Long no) {
-		return mapper.view(no);
-	}
+	public BoardVO view(Long no);
 	
-	public Integer increase(Long no) {
-		return mapper.increase(no);
-	}
+	public Integer increase(Long no);
 	
-	public Integer update(BoardVO vo) {
-		return mapper.update(vo);
-	}
+	public Integer update(BoardVO vo);
 	
-	public Integer delete(Long no) {
-		return mapper.delete(no);
-	}
+	public Integer delete(Long no);
 }

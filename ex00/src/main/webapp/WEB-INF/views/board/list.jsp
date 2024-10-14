@@ -35,7 +35,7 @@ $(function(){
 <body>
 
 <%-- <decorator:main/> --%>
-${list}
+<%-- ${list} --%>
 <a href="writeForm">writeForm</a>
 <div class="container">
   <h2>Card Header and Footer</h2>

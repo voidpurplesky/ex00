@@ -8,13 +8,19 @@
 <title>Insert title here</title>
 <jsp:include page="../jsp/webLib.jsp"></jsp:include>
 <script>
+console.log("1: <head><script> s");
 $(function(){
 
+	console.log("last: $(function(){}); s");
 	/* $("#test").click(function(){
 		$('#myModal').modal('show');
 	}); */
 
+	
+
+	
 	});
+	
 $("#updateBtn").click(function(){
 	location = "update?no=${vo.no}";
 });
@@ -23,8 +29,52 @@ $("#deleteBtn").click(function(){
 	$("#pw").val("");
 });
 
-</script>
+$.get("/boardreply/list?page=1&no=${vo.no }", function(data, status){
+	console.log(typeof data); // string / object
+	console.log(data);
+	console.log(data.map);
+	//console.log(data.length); // 0 / un
+	
+	console.log(data.list); // undefined
+	console.log(status); // success
+	console.log("Data: " + data + "\nStatus: " + status);
+	
+});
+/*
 
+data
+
+#document (http://localhost/board/view?no=61)
+<Map>
+	<list>
+		<rno>2</rno><no>61</no><content>질문있습니다.2</content>
+		<id>id1</id><writedate>1728872927000</writedate></list>
+	<list>
+		<rno>1</rno><no>61</no><content>질문있습니다.</content>
+		<id>id1</id><writedate>1728866858000</writedate>
+	</list>
+	<pageObject><page>1</page><perPageNum>10</perPageNum><startRow>1</startRow><endRow>10</endRow><perGroupPageNum>10</perGroupPageNum><startPage>1</startPage><endPage>1</endPage><totalPage>1</totalPage><totalRow>2</totalRow><key/><word/><period>pre</period><notPageQuery>perPageNum=10&amp;key=&amp;word=</notPageQuery><pageQuery>page=1&amp;perPageNum=10&amp;key=&amp;word=</pageQuery></pageObject>
+</Map>
+ */
+
+	 
+	 
+console.log("2: <head><script> e");
+</script>
+<!-- 3: reply.js -->
+
+<script>
+let no = "${vo.no}"; // 전역변수
+
+</script>
+<script src="/js/reply.js"></script>
+<script src="/js/replyProcess.js"></script>
+<script src="/js/dateTime.js"></script>
+<script>
+
+//replyService.list(1,61);
+replyService.list(1);
+</script>
 </head>
 <body>
 ${vo}
@@ -64,7 +114,9 @@ ${vo}
     	<button class="btn btn-primary" id="updateBtn">update</button>
     </div>
   </div>
-</div>
+  
+  <jsp:include page="boardreply.jsp"/>
+</div><!-- container -->
 <div id="myModal" class="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
