@@ -14,5 +14,5 @@ public interface BoardReplyMapper {
 	//public Integer increase(Long no);
 	public Long getTotalRow(Long no);
 	public Integer update(BoardReplyVO vo);
-	public Integer delete(Long no);
+	public Integer delete(BoardReplyVO vo);
 }

@@ -84,11 +84,12 @@ public class BoardController {
 		return "redirect:/board/view/?no="+vo.getNo();
 	}
 	
-	@GetMapping("/delete")
+	@PostMapping("/delete")
 	public String delete(Long no, RedirectAttributes rttr) {
-		
+		log.info("delete");
+		log.info(no);
 		if (service.delete(no) == 1)
-			rttr.addFlashAttribute("msg", "글수정완");
+			rttr.addFlashAttribute("msg", "글삭완");
 		else
 			rttr.addFlashAttribute("msg", "비밀번호가 틀림");
 		

@@ -3,47 +3,45 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.boardreply.mapper.BoardReplyMapper">
-  <select id="list" resultType="org.zerock.boardreply.vo.BoardReplyVO">
-  select rno, no, content, id, writedate, name
-  from  
-  (
-  	select rownum rnum, rno, no, content, id, writedate, name
-  	from 
-  	(
-  		select b.rno, b.no, b.content, b.id, b.writedate, m.name
-  		from board_reply b, member m
-  		where m.id = b.id
-        and b.no = #{no}
-  		order by rno desc
-  	)
-  )
-  where rnum between #{pageObject.startRow} and #{pageObject.endRow}
-  </select>
+	<select id="list" resultType="org.zerock.boardreply.vo.BoardReplyVO">
+		select rno, no, content, id, writedate, name
+		from  
+		(
+			select rownum rnum, rno, no, content, id, writedate, name
+			from 
+			(
+				select b.rno, b.no, b.content, b.id, b.writedate, m.name
+				from board_reply b, member m
+				where m.id = b.id
+		      and b.no = #{no}
+				order by rno desc
+			)
+		)
+		where rnum between #{pageObject.startRow} and #{pageObject.endRow}
+	</select>
     
   <select id="getTotalRow" resultType="Long">
   select count(no) from board_reply where no = #{no}
   </select>
   
   <insert id="write">
-  	<selectKey keyProperty="no" resultType="Long" order="BEFORE">
-  		select board_seq.nextval from dual
+  	<selectKey keyProperty="rno" resultType="Long" order="BEFORE">
+  		select board_reply_seq.nextval from dual
   	</selectKey>
-  	  insert into board(no, title, content, writer, pw)
-  	values (#{no}, #{title}, #{content}, #{writer}, #{pw})
+  	  insert into board_reply(rno, no, content, id)
+  	values (#{rno}, #{no}, #{content}, #{id})
   </insert>
   <update id="update">
   <!-- ![CDATA[]] -->
 <![CDATA[
-  update board set 
-  title = #{title}
-  , content = #{content}
-  , writer = #{writer}
-  where no = #{no} and pw = #{pw}
+	update board_reply set 
+   	content = #{content}
+    where rno = #{rno} and id = #{id}
   ]]>
   </update>
-  <delete id="delete" parameterType="Long">
-  delete from board
-  where no = #{no}
+  <delete id="delete" parameterType="org.zerock.boardreply.vo.BoardReplyVO">
+	delete from board_reply
+	where rno = #{rno} and id = #{id}
   </delete>
   <!--<select id="OneOne" resultType="string">
   select title from BOARD 

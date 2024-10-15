@@ -4,8 +4,8 @@
  */
 console.log("3: reply.js s");
 
-let replyService = {
-
+let replyService = 
+{
 	"list": function(page, callback, error) {
 	console.log("3: list.js s");
 	console.log(page);
@@ -28,12 +28,63 @@ let replyService = {
 	}); 
 },
 "write": function(reply, callback, error) {
-console.log("3: write.js s");
+	console.log("write");
+	
+	$.ajax({
+		type: "post", // 데이터전송방식
+		url: "/boardreply/write",
+		data: JSON.stringify(reply),
+		contentType: "application/json; charset:utf-8", // 전송되는 데이터타입과 인코딩
+		// 성공햇을때
+		success: function(result, status, xhr) {
+			if (callback) callback(result);
+			else alert(result);
+		},
+		error: function(xhr, status, err){
+			console.log("xhr:"+xhr);
+			console.log(status);console.log(err);
+			if (error) error(err);
+			else alert('댓글등록실패');
+		}
+	});
 },
 "update": function(reply, callback, error) {
-console.log("3: update.js s");
+	console.log("update");
+	
+	$.ajax({
+		type: "post", 
+		url: "/boardreply/update",
+		data: JSON.stringify(reply),
+		contentType: "application/json; charset:utf-8",
+		success: function(result, status, xhr) {
+			if (callback) callback(result);
+			else alert(result);
+		},
+		error: function(xhr, status, err){
+			console.log("xhr:"+xhr);
+			console.log(status);console.log(err);
+			if (error) error(err);
+			else alert('댓글수정실패');
+		}
+	});
 },
-"delete": function(reply, callback, error) {
-console.log("3: delete.js s");
-}
+	"delete": function(rno, callback, error) 
+	{
+		$.ajax({
+			type: "get", 
+			url: "/boardreply/delete?rno=" + rno,
+			success: function(result, status, xhr) {
+				if (callback) callback(result);
+				else alert(result);
+			},
+			error: function(xhr, status, err) {
+				console.log("xhr:"+xhr);
+				console.log(status);console.log(err);
+				if (error) error(err);
+				else alert('댓삭실패');
+			} 
+		});
+	}
+	
 };
+

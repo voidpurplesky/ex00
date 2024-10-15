@@ -11,5 +11,5 @@ public interface BoardReplyService {
 	public Integer write(BoardReplyVO vo);
 	//public BoardReplyVO view(Long rno);
 	public Integer update(BoardReplyVO vo);
-	public Integer delete(Long rno);
+	public Integer delete(BoardReplyVO vo);
 }

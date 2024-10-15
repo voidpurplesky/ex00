@@ -36,7 +36,6 @@ $(function(){
 
 <%-- <decorator:main/> --%>
 <%-- ${list} --%>
-<a href="writeForm">writeForm</a>
 <div class="container">
   <h2>Card Header and Footer</h2>
   <div class="card">
@@ -44,7 +43,8 @@ $(function(){
     	<a href="writeForm" class="btn btn-primary" id="writeForm">writeForm</a>
     </div>
     <div class="card-body">
-    <c:forEach items="${ list}" var="vo">
+    <c:forEach items="${list}" var="vo">
+    <a href="/board/view?no=${vo.no}">
     	<div class="card dataRow" data-no="${vo.no }">
     		<div class="card-header">
     			<span class="float-right">${vo.hit }</span>
@@ -59,6 +59,7 @@ $(function(){
     			${vo.writer}
     		</div>
   		</div>
+  		</a>
     </c:forEach>
     	
     
