@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.board.mapper.BoardMapper;
 import org.zerock.board.vo.BoardVO;
+import org.zerock.boardreply.vo.BoardReplyVO;
 import org.zerock.util.PageObject;
 
 import lombok.extern.log4j.Log4j;
@@ -25,10 +27,13 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.list(pageObject);
 	}
 	
+	@Transactional
 	public Integer write(BoardVO vo) {
+		
+		//mapper.writeTx(vo); // ThrowERROR 글번호 재사용 : pk 예외
 		return mapper.write(vo);
 	}
-	
+		
 	public BoardVO view(Long no) {
 		return mapper.view(no);
 	}

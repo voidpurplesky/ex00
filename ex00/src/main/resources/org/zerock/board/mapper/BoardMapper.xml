@@ -13,6 +13,7 @@
   	(
   		select no, title, writer, writedate, hit 
   		from board
+  		<include refid="search"></include>
   		order by no desc
   	)
   )
@@ -45,6 +46,12 @@
   	  insert into board(no, title, content, writer, pw)
   	values (#{no}, #{title}, #{content}, #{writer}, #{pw})
   </insert>
+  
+    <insert id="writeTx">
+  	  insert into board(no, title, content, writer, pw)
+  	values (#{no}, #{title}, #{content}, #{writer}, #{pw})
+  </insert>
+  
   <update id="update">
   <!-- ![CDATA[]] -->
 <![CDATA[
@@ -59,6 +66,28 @@
   delete from board
   where no = #{no}
   </delete>
+  
+	<!-- 일반리스트 검색 -->
+	<sql id="search">
+	<if test="word != null and word != ''.toString()">
+		<trim prefix="where" prefixOverrides="or">
+			<if test="key.indexOf('t') >= 0">
+				or title like '%' || #{word} || '%'
+			</if>
+			<if test="key.indexOf('w') >= 0">
+				or writer like '%' || #{word} || '%'
+			</if>
+			<if test="key.indexOf('c') >= 0">
+				or content like '%' || #{word} || '%'
+			</if>
+		</trim>
+		</if>
+	</sql>
+<!-- 
+select no, title, writer, writedate, hit from ( select rownum rnum, no, title, writer, writedate, 
+hit from ( select no, title, writer, writedate, hit from board where title like '%' || 'fgfg' 
+|| '%' order by no desc ) ) where rnum between 1 and 10 
+ -->
   <!--<select id="OneOne" resultType="string">
   select title from BOARD 
   WHERE ROWNUM= 1

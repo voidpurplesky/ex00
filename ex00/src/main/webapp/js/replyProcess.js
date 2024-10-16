@@ -31,7 +31,7 @@ function showList(page) {
 				if (id == list[i].id) {
 					str += '<div>'
 					+	'<button class="replyUpdateBtn btn btn-success btn-sm">update</button>'
-					+	'<button class="replyDeleteBtn btn btn-danger btn-sm">delete</button>'
+					+	' <button class="replyDeleteBtn btn btn-danger btn-sm">delete</button>'
 					+'</div>'
 				}
 				
@@ -41,6 +41,9 @@ function showList(page) {
 			
 			$(".chat").html(str);
 			
+			// 댓페이지 util.js
+			$(".pagination").html(replyPagination(data.pageObject));
+
 		}
 	);
 }
@@ -94,8 +97,8 @@ $(function(){
 			$("#replyModal").hide(); // close modal
 			//$("#msgModal .modal-body").text(result);
 			// $("#msgModal").modal("show");
-			showList(1);
-			//showList(replyPage);
+			//showList(1);
+			showList(replyPage);
 		});
 	});
 	
@@ -106,7 +109,7 @@ $(function(){
 			$("#replyModal").hide(); // close modal
 			//$("#msgModal .modal-body").text(result);
 			// $("#msgModal").model("show");
-			showList(1);
+			showList(replyPage);
 		});
 		
 	});
@@ -122,9 +125,24 @@ $(function(){
 		if (rno == null) return; 
 		
 		replyService.delete(rno, function(){
-			showList(1);
+			showList(replyPage);
 		});
 		
+	});
+
+	// 댓페이지이벤처리
+	$(".pagination").on("click", "a", function(){
+		
+		let page = $(this).parent().data("page");
+		//alert(page);
+		/*
+		console.log($(this));
+		console.log($(this).parent());
+		console.log($(this).parent().data("page"));
+		*/
+		if (replyPage == page) return;
+		replyPage = page;
+		showList(replyPage);
 	});
 	
 }); // $(function(){

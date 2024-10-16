@@ -35,3 +35,6 @@ select rno, no, content, id, writedate, name from ( select rownum rnum, rno, no,
 writedate, name from ( select b.rno, b.no, b.content, b.id, b.writedate, m.name from board_reply 
 b, member m where m.id = b.id and b.no = 61 order by rno desc ) ) where rnum between 1 and 
 10 ;
+
+insert into board_reply(rno, no, content, id)
+(select board_reply_seq.nextval, no, content, id from board_reply);

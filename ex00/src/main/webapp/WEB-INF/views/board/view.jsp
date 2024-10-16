@@ -16,7 +16,12 @@ $(function(){
 		$('#myModal').modal('show');
 	}); */
 
-	
+	$("#listBtn").click(function(){
+		location = "list?page=${param.page}"
+			+ "&perPageNum=${param.perPageNum}"
+			+ "&key=${param.key}"
+			+ "&word=${param.word}";
+	});
 
 	
 	});
@@ -71,6 +76,7 @@ let replyPage = 1;
 <script src="/js/reply.js"></script>
 <script src="/js/replyProcess.js"></script>
 <script src="/js/dateTime.js"></script>
+<script src="/js/util.js"></script>
 <script>
 
 //replyService.list(1,61);
@@ -78,8 +84,7 @@ replyService.list(1);
 </script>
 </head>
 <body>
-${vo}
-
+<%-- ${vo} --%>
 <div class="container">
   <h2>view</h2>
   <div class="card">
@@ -104,7 +109,7 @@ ${vo}
     
     </div> 
     <div class="card-footer">
-    	<a href="list" class="btn btn-primary">list</a>
+    	<button id="listBtn" class="btn btn-primary">list</button>
    		<a href="update?no=${vo.no }" class="btn btn-success">update</a> 
    		<button class="btn btn-danger" id="deleteBtn" data-toggle="modal" data-target="#deleteModal">delete</button>
     </div>

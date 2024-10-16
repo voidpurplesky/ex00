@@ -36,6 +36,7 @@ public class BoardController {
 		model.addAttribute("pageObject", pageObject);
 		
 		model.addAttribute("list", service.list(pageObject));
+		
 		return "board/list";
 		//3
 		//ModelAndView mav = new ModelAndView();
