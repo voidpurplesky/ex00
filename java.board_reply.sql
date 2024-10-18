@@ -1,3 +1,4 @@
+select * from board;
 -- 1. °´Ã¼Á¦°Å
 drop table board_reply CASCADE CONSTRAINTS PURGE;
 drop SEQUENCE board_reply_seq;
@@ -38,3 +39,9 @@ b, member m where m.id = b.id and b.no = 61 order by rno desc ) ) where rnum bet
 
 insert into board_reply(rno, no, content, id)
 (select board_reply_seq.nextval, no, content, id from board_reply);
+
+select * from member;
+select m.id, m.pw, m.name, m.photo, m.newMsgCnt, m.gradeNo, g.gradeName 
+from member m, grade 
+g where id = 'id1' and pw = '1' and m.gradeNo = g.gradeNo 
+;
